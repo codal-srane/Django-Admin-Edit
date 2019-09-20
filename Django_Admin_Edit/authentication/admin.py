@@ -1,13 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
 from .forms import UserCreationAdminForm
 
 User = get_user_model()
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(UserAdmin):
+	#class Meta:
+	#	model = User	
 	add_form = UserCreationAdminForm
-	model = User
+	list_display = ['id', '__str__', 'date_joined', 'last_login', 'is_staff', 'is_active']
 	add_fieldsets = (
 		(None, {
             'fields': (
